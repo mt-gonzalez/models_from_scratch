@@ -1,0 +1,8 @@
+name: models_from_scratch
+channels:
+  - defaults
+dependencies:
+  - python=3.12.7
+  - numpy
+  - matplotlib
+  - pandas
