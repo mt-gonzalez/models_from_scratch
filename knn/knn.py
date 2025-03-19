@@ -16,12 +16,12 @@ class KNN:
     def __init__(self, k=5):
         self.k = k
 
-    def fit(self, X_train, y_train):
+    def fit(self, X_train, Y_train):
         # In k-nearest neighbours the fitting is just saving
         # the training data to the calculate the distance of
         # the data to predict
         self.X_train = X_train
-        self.y_train = y_train
+        self.Y_train = Y_train
 
     def get_neighbours(self, x_0, d_formula=euclidean_distance):
         distances = []
@@ -30,5 +30,23 @@ class KNN:
         
         distances = np.array(distances)
         sorted_distances = np.argsort(distances)
-        neighbours = sorted_distances[:self.k] # We took the k-nearest neighbours
+        neighbours = self.Y_train[sorted_distances[:self.k]] # We took the k-nearest neighbours
+
+        return neighbours
+    
+    def most_common(self, k_neighbours):
+        k_neighbours = Counter(self.get_neighbours(x_0))
+
+        most_common, most_common_count = k_neighbours(1)[0]
+        #I want to know how many neighbours share the top
+        top_commons = len(count for count in k_neighbours.values() if count == most_common_count)
+        if top_commons == 1:
+            return most_common
+        else:
+            return most_common(k_neighbours[:-1])
+    
+    def predict(self, x_0):
+        predicted_class = self.most_common(self.get_neighbours(x_0))
+        return predicted_class
+
 
