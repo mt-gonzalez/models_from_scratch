@@ -43,14 +43,14 @@ class KNN:
     
     def most_common(self, neighbours): # Receives a np.array
         k_neighbours = Counter(neighbours) 
-        most_common, most_common_count = most_common.k_neighbours(1)[0]
+        most_repeated, most_repeated_count = k_neighbours.most_common(1)[0]
 
         #I want to know how many neighbours share the top
-        top_commons = len(count for count in k_neighbours.values() if count == most_common_count)
-        if top_commons == 1:
-            return most_common # If there is one top neighbours we return it
+        top_repeated = len(count for count in k_neighbours.values() if count == most_repeated_count)
+        if top_repeated == 1:
+            return most_repeated # If there is one top neighbours we return it
         else:
-            return most_common(k_neighbours[:-1]) # Otherwise we slice the last neighbour and count again
+            return most_repeated(k_neighbours[:-1]) # Otherwise we slice the last neighbour and count again
     
     def predict(self, x_0):
         predicted_class = self.most_common(self.get_neighbours(x_0))
