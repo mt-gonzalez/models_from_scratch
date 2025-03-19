@@ -46,8 +46,8 @@ class KNN:
         most_repeated, most_repeated_count = k_neighbours.most_common(1)[0]
 
         #I want to know how many neighbours share the top
-        top_repeated = len(count for count in k_neighbours.values() if count == most_repeated_count)
-        if top_repeated == 1:
+        top_repeated = list(count for count in k_neighbours.values() if count == most_repeated_count)
+        if len(top_repeated) == 1:
             return most_repeated # If there is one top neighbours we return it
         else:
             return most_repeated(k_neighbours[:-1]) # Otherwise we slice the last neighbour and count again
