@@ -42,7 +42,7 @@ class KNN:
         return neighbours
     
     def most_common(self, neighbours): # Receives a np.array
-        if isinstance(neighbours, int):  # Si es un solo número, convertirlo en lista
+        if isinstance(neighbours, int):  # If its a number, conver to list
             neighbours = [neighbours]
 
         k_neighbours = Counter(neighbours) 
