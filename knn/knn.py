@@ -42,6 +42,9 @@ class KNN:
         return neighbours
     
     def most_common(self, neighbours): # Receives a np.array
+        if isinstance(neighbours, int):  # Si es un solo número, convertirlo en lista
+            neighbours = [neighbours]
+
         k_neighbours = Counter(neighbours) 
         most_repeated, most_repeated_count = k_neighbours.most_common(1)[0]
 
@@ -50,10 +53,11 @@ class KNN:
         if len(top_repeated) == 1:
             return most_repeated # If there is one top neighbours we return it
         else:
-            return most_repeated(k_neighbours[:-1]) # Otherwise we slice the last neighbour and count again
+            return self.most_common(k_neighbours[:-1]) # Otherwise we slice the last neighbour and count again
     
     def predict(self, x_0):
-        predicted_class = self.most_common(self.get_neighbours(x_0))
+        d_from_x = self.gather_distances(x_0)
+        predicted_class = self.most_common(self.get_neighbours(d_from_x))
         return predicted_class
 
 
