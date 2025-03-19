@@ -43,8 +43,8 @@ class KNN:
     
     def most_common(self, neighbours): # Receives a np.array
         k_neighbours = Counter(neighbours) 
+        most_common, most_common_count = most_common.k_neighbours(1)[0]
 
-        most_common, most_common_count = k_neighbours(1)[0]
         #I want to know how many neighbours share the top
         top_commons = len(count for count in k_neighbours.values() if count == most_common_count)
         if top_commons == 1:
