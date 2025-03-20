@@ -41,7 +41,7 @@ create_model <- function(k=3) {
 }
 
 fit.KNN <- function(model, X_train, Y_train) {
-  model$X_Train <- X_train
+  model$X_train <- X_train
   model$Y_train <- Y_train
   
   return(model)
